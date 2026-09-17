@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.kilo/
+.openai/
+.vercel/
+.git-corrupt-backup/
+*.log

@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#020817">
+  <meta name="referrer" content="no-referrer">
+  <title>Elsherif Store - 2FA</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Cpath d='M18 20h28v8H28v5h15v8H28v3h20v8H18z' fill='white'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #020817;
+      --panel: #07111f;
+      --ink: #eaf6ff;
+      --muted: #8fb7d6;
+      --line: rgba(28, 170, 255, 0.32);
+      --primary: #008cff;
+      --primary-dark: #0066ff;
+      --success: #16a34a;
+      --danger: #ff3b6b;
+      --shadow: 0 0 34px rgba(0, 140, 255, 0.34);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(0, 140, 255, 0.16), transparent 30%),
+        radial-gradient(circle at 85% 90%, rgba(37, 99, 235, 0.13), transparent 34%),
+        var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+
+    main {
+      width: min(100%, 560px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      margin: 0 auto 14px;
+      padding: 7px 11px;
+      border: 1px solid rgba(45, 183, 255, 0.28);
+      border-radius: 999px;
+      background: rgba(0, 140, 255, 0.08);
+      color: #9edaff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .logo {
+      width: 62px;
+      height: 62px;
+      margin: 0 auto 16px;
+      border-radius: 18px;
+      background: #04152a;
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+      font-weight: 800;
+      border: 1px solid rgba(45, 183, 255, 0.72);
+      box-shadow: 0 0 22px rgba(0, 140, 255, 0.72), inset 0 0 18px rgba(0, 102, 255, 0.18);
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.15;
+      letter-spacing: 0;
+      text-shadow: 0 0 18px rgba(0, 140, 255, 0.62);
+    }
+
+    .subtitle {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .panel {
+      background: linear-gradient(145deg, rgba(10, 26, 45, 0.96), rgba(4, 14, 28, 0.98));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      backdrop-filter: blur(18px);
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    input {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid rgba(45, 183, 255, 0.42);
+      border-radius: 12px;
+      padding: 0 14px;
+      font-size: 16px;
+      outline: none;
+      color: var(--ink);
+      background: #020b18;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      letter-spacing: 0.02em;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(0, 140, 255, 0.18), 0 0 20px rgba(0, 140, 255, 0.36);
+    }
+
+    button {
+      min-height: 48px;
+      border: 0;
+      border-radius: 12px;
+      padding: 0 16px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 0 16px rgba(0, 140, 255, 0.50);
+      transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+    }
+
+    button:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 0 22px rgba(0, 140, 255, 0.74);
+      transform: translateY(-1px);
+    }
+
+    button.secondary {
+      background: rgba(0, 140, 255, 0.12);
+      color: #bfe7ff;
+      border: 1px solid rgba(45, 183, 255, 0.32);
+      box-shadow: none;
+    }
+
+    button.secondary:hover {
+      background: rgba(0, 140, 255, 0.22);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .whatsapp-link {
+      width: 100%;
+      min-height: 50px;
+      margin-top: 18px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #ecfff5;
+      background: #0bbf64;
+      border: 1px solid rgba(83, 255, 169, 0.65);
+      box-shadow: 0 0 18px rgba(11, 191, 100, 0.52);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 800;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .whatsapp-link:hover {
+      background: #09a957;
+      box-shadow: 0 0 26px rgba(11, 191, 100, 0.72);
+      transform: translateY(-1px);
+    }
+
+    .whatsapp-icon {
+      width: 22px;
+      height: 22px;
+      display: inline-block;
+    }
+
+    .code-card {
+      margin-top: 24px;
+      border: 1px solid var(--line);
+      background: #030d1b;
+      border-radius: 16px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: inset 0 0 24px rgba(0, 102, 255, 0.14);
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .code-card:has(.code:not(.empty)):hover {
+      border-color: rgba(45, 183, 255, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .code {
+      min-height: 61px;
+      font-size: 52px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 8px;
+      font-variant-numeric: tabular-nums;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-wrap: anywhere;
+      color: #dff5ff;
+      text-shadow: 0 0 18px rgba(0, 140, 255, 0.72);
+    }
+
+    .empty {
+      color: var(--muted);
+      font-size: 16px;
+      letter-spacing: 0;
+      font-weight: 600;
+    }
+
+    .timer-wrap {
+      margin: 18px auto 0;
+      height: 8px;
+      max-width: 360px;
+      border-radius: 999px;
+      background: rgba(143, 183, 214, 0.20);
+      overflow: hidden;
+    }
+
+    .timer {
+      height: 100%;
+      width: 0%;
+      background: var(--success);
+      border-radius: inherit;
+      transition: width 0.25s linear, background 0.25s ease;
+    }
+
+    .status {
+      min-height: 22px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .status.error {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    .footnote {
+      margin: 18px 0 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .compat {
+      margin-top: 22px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 18px;
+        align-items: flex-start;
+      }
+
+      h1 {
+        font-size: 29px;
+      }
+
+      .panel {
+        padding: 20px;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      .code {
+        font-size: 40px;
+        letter-spacing: 5px;
+      }
+    }
+
+    /* 2026 interface */
+    :root {
+      --bg: #07090e;
+      --panel: #10141d;
+      --ink: #f7f8fb;
+      --muted: #8e97a8;
+      --line: rgba(255, 255, 255, 0.09);
+      --primary: #7c5cff;
+      --primary-dark: #6747ee;
+      --success: #38d996;
+      --danger: #ff647c;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    body {
+      min-height: 100svh;
+      padding: 40px 20px;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(124, 92, 255, 0.22), transparent 38%),
+        radial-gradient(circle at 100% 100%, rgba(31, 191, 145, 0.1), transparent 35%),
+        #07090e;
+    }
+
+    body::before {
+      opacity: 0.12;
+      background-size: 48px 48px;
+    }
+
+    main {
+      width: min(100%, 620px);
+    }
+
+    .brand {
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 72px;
+      height: 72px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 22px;
+      background: linear-gradient(145deg, #8d73ff, #5c3de0);
+      box-shadow: 0 18px 45px rgba(103, 71, 238, 0.35), inset 0 1px rgba(255, 255, 255, 0.25);
+      font-size: 0;
+    }
+
+    .logo svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border: 1px solid rgba(124, 92, 255, 0.24);
+      border-radius: 999px;
+      background: rgba(124, 92, 255, 0.08);
+      color: #a995ff;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #9c87ff;
+      box-shadow: 0 0 12px rgba(156, 135, 255, 0.9);
+    }
+
+    h1 {
+      font-size: clamp(30px, 7vw, 43px);
+      letter-spacing: -0.045em;
+      text-shadow: none;
+    }
+
+    h1 span {
+      color: #9c87ff;
+    }
+
+    .product-name {
+      margin: 7px 0 0;
+      color: #d7d9e2;
+      font-size: 15px;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      max-width: 430px;
+      margin: 10px auto 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .panel {
+      padding: 10px;
+      border-color: var(--line);
+      border-radius: 30px;
+      background: rgba(15, 19, 28, 0.88);
+      box-shadow: var(--shadow), inset 0 1px rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(24px);
+    }
+
+    .input-section {
+      padding: 22px 22px 18px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .section-head label {
+      margin: 0;
+      color: #e9ebf1;
+      font-size: 14px;
+    }
+
+    .local-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: #7be0b7;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .local-pill::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #38d996;
+      box-shadow: 0 0 12px #38d996;
+    }
+
+    .field-row {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+      padding: 6px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #090c12;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .field-row:focus-within {
+      border-color: rgba(124, 92, 255, 0.72);
+      box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.1);
+    }
+
+    input {
+      min-width: 0;
+      min-height: 46px;
+      padding: 0 12px;
+      border: 0;
+      background: transparent;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border: 0;
+      box-shadow: none;
+    }
+
+    button {
+      min-height: 46px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #876aff, #6747ee);
+      box-shadow: 0 8px 24px rgba(103, 71, 238, 0.25);
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #947aff, #7353f2);
+      box-shadow: 0 10px 28px rgba(103, 71, 238, 0.35);
+    }
+
+    .actions {
+      margin-top: 10px;
+      gap: 8px;
+    }
+
+    button.secondary {
+      min-height: 36px;
+      padding: 0 11px;
+      border: 0;
+      background: transparent;
+      color: #929bad;
+      font-size: 12px;
+    }
+
+    button.secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      box-shadow: none;
+    }
+
+    .code-card {
+      position: relative;
+      margin: 0;
+      padding: 34px 22px 26px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(124, 92, 255, 0.16), transparent 55%),
+        #0b0e15;
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    .code-card::before {
+      content: 'CURRENT CODE';
+      display: block;
+      margin-bottom: 18px;
+      color: #747d8e;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+    }
+
+    .code-card:has(.code:not(.empty)):hover {
+      border-color: rgba(124, 92, 255, 0.48);
+      transform: translateY(-2px);
+    }
+
+    .code {
+      min-height: 60px;
+      color: #fff;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: clamp(38px, 10vw, 58px);
+      letter-spacing: 0.16em;
+      text-shadow: 0 0 32px rgba(124, 92, 255, 0.42);
+    }
+
+    .code.empty {
+      padding: 0 20px;
+      color: #778093;
+      font-family: inherit;
+      font-size: 15px;
+      letter-spacing: 0;
+      text-shadow: none;
+    }
+
+    .timer-wrap {
+      height: 5px;
+      max-width: 390px;
+      margin-top: 24px;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .timer {
+      background: var(--success);
+      box-shadow: 0 0 15px currentColor;
+    }
+
+    .status {
+      margin-top: 14px;
+      color: #7f8899;
+      font-size: 12px;
+    }
+
+    .whatsapp-link {
+      width: auto;
+      min-height: 48px;
+      margin: 10px 12px 12px;
+      border: 0;
+      border-radius: 15px;
+      background: rgba(56, 217, 150, 0.09);
+      color: #68e0ad;
+      box-shadow: none;
+      font-size: 14px;
+    }
+
+    .whatsapp-link:hover {
+      background: rgba(56, 217, 150, 0.15);
+      box-shadow: none;
+    }
+
+    .footnote {
+      margin-top: 22px;
+      color: #5f6775;
+      font-size: 12px;
+    }
+
+    .compat {
+      margin-top: 7px;
+      color: #454c58;
+      font-size: 11px;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 24px 14px;
+        align-items: center;
+      }
+
+      .panel {
+        padding: 8px;
+        border-radius: 24px;
+      }
+
+      .input-section {
+        padding: 18px 14px 14px;
+      }
+
+      .field-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .field-row button {
+        width: 100%;
+      }
+
+      .actions button {
+        width: auto;
+      }
+
+      .code-card {
+        padding-inline: 12px;
+      }
+
+      .code {
+        letter-spacing: 0.1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="brand" aria-label="Elsherif Store two-factor authentication">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 5 6v5c0 4.6 2.9 8.5 7 10 4.1-1.5 7-5.4 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.8"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="eyebrow">PRIVATE / LOCAL / SECURE</div>
+      <h1>Elsherif Store <span>2FA</span></h1>
+      <p class="product-name">Secure Authenticator</p>
+      <p class="subtitle">Instant verification codes, generated privately on your device. Nothing leaves your browser.</p>
+    </section>
+
+    <section class="panel">
+      <div class="input-section">
+        <div class="section-head">
+          <label for="secret">Authenticator secret</label>
+          <span class="local-pill">On-device</span>
+        </div>
+        <div class="field-row">
+          <input id="secret" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your Base32 key">
+          <button id="paste" type="button">Paste key</button>
+        </div>
+
+        <div class="actions">
+          <button id="toggle" class="secondary" type="button">Show secret</button>
+          <button id="clear" class="secondary" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div class="code-card" aria-live="polite">
+        <div id="code" class="code empty">Enter a secret to generate your code</div>
+        <div class="timer-wrap" aria-hidden="true">
+          <div id="timer" class="timer"></div>
+        </div>
+        <div id="status" class="status">Codes are generated locally. Secrets never leave your browser.</div>
+      </div>
+
+      <a class="whatsapp-link" href="https://wa.me/201039821009" target="_blank" rel="noopener noreferrer">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M12.03 2C6.52 2 2.04 6.35 2.04 11.7c0 1.7.46 3.36 1.34 4.82L2 22l5.68-1.42a10.26 10.26 0 0 0 4.35.98c5.51 0 9.99-4.35 9.99-9.7S17.54 2 12.03 2Zm0 17.9c-1.44 0-2.84-.37-4.06-1.08l-.29-.17-3.37.84.82-3.2-.19-.31a8.02 8.02 0 0 1-1.25-4.28c0-4.43 3.74-8.04 8.34-8.04 4.6 0 8.34 3.61 8.34 8.04 0 4.6-3.66 8.2-8.34 8.2Zm4.57-6.02c-.25-.12-1.48-.71-1.71-.79-.23-.08-.4-.12-.57.12-.17.24-.65.79-.8.95-.15.16-.29.18-.54.06-.25-.12-1.06-.38-2.02-1.2-.75-.65-1.25-1.45-1.4-1.69-.15-.24-.02-.37.11-.49.12-.11.25-.29.37-.43.13-.14.17-.24.25-.4.08-.16.04-.3-.02-.43-.06-.12-.57-1.33-.78-1.82-.2-.47-.41-.4-.57-.41h-.49c-.17 0-.44.06-.67.3-.23.24-.88.83-.88 2.03 0 1.2.9 2.36 1.03 2.52.13.16 1.77 2.61 4.29 3.66.6.25 1.07.4 1.43.51.6.19 1.15.16 1.58.1.48-.07 1.48-.58 1.69-1.15.21-.57.21-1.06.15-1.15-.06-.1-.23-.16-.48-.28Z"/>
+        </svg>
+        WhatsApp
+      </a>
+    </section>
+
+    <p class="footnote">Elsherif Store - 2FA</p>
+    <p class="compat">Compatible with Google Authenticator, Microsoft Authenticator, Authy, GitHub, Discord and all TOTP services</p>
+  </main>
+
+  <script>
+    const secretInput = document.getElementById('secret');
+    const codeEl = document.getElementById('code');
+    const statusEl = document.getElementById('status');
+    const timerEl = document.getElementById('timer');
+    const pasteBtn = document.getElementById('paste');
+    const toggleBtn = document.getElementById('toggle');
+    const clearBtn = document.getElementById('clear');
+
+    let latestCode = '';
+
+    function cleanSecret(value) {
+      return value.replace(/\s+/g, '').replace(/-/g, '').toUpperCase();
+    }
+
+    function getSecretFromPath() {
+      const path = window.location.pathname.replace(/^\/+|\/+$/g, '');
+      if (!path) {
+        return '';
+      }
+
+      try {
+        return decodeURIComponent(path);
+      } catch {
+        return path;
+      }
+    }
+
+    function replacePathWithCleanSecret(secret) {
+      const cleaned = cleanSecret(secret).toLowerCase();
+      const cleanPath = cleaned ? `/${cleaned}` : '/';
+      window.history.replaceState(null, '', `${cleanPath}${window.location.search}${window.location.hash}`);
+    }
+
+    function base32ToBytes(base32) {
+      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+      const cleaned = cleanSecret(base32).replace(/=+$/, '');
+      let bits = '';
+      const bytes = [];
+
+      for (const char of cleaned) {
+        const value = alphabet.indexOf(char);
+        if (value === -1) {
+          throw new Error('Use a valid Base32 secret.');
+        }
+        bits += value.toString(2).padStart(5, '0');
+      }
+
+      for (let i = 0; i + 8 <= bits.length; i += 8) {
+        bytes.push(parseInt(bits.slice(i, i + 8), 2));
+      }
+
+      if (!bytes.length) {
+        throw new Error('Enter a secret to generate your code.');
+      }
+
+      return new Uint8Array(bytes);
+    }
+
+    function counterToBytes(counter) {
+      const buffer = new ArrayBuffer(8);
+      const view = new DataView(buffer);
+      const high = Math.floor(counter / 0x100000000);
+      const low = counter >>> 0;
+      view.setUint32(0, high);
+      view.setUint32(4, low);
+      return buffer;
+    }
+
+    async function generateTotp(secret) {
+      const keyData = base32ToBytes(secret);
+      const key = await crypto.subtle.importKey(
+        'raw',
+        keyData,
+        { name: 'HMAC', hash: 'SHA-1' },
+        false,
+        ['sign']
+      );
+      const counter = Math.floor(Date.now() / 1000 / 30);
+      const signature = await crypto.subtle.sign('HMAC', key, counterToBytes(counter));
+      const hash = new Uint8Array(signature);
+      const offset = hash[hash.length - 1] & 0x0f;
+      const binary =
+        ((hash[offset] & 0x7f) << 24) |
+        ((hash[offset + 1] & 0xff) << 16) |
+        ((hash[offset + 2] & 0xff) << 8) |
+        (hash[offset + 3] & 0xff);
+      return String(binary % 1000000).padStart(6, '0');
+    }
+
+    function setMessage(message, isError = false) {
+      statusEl.textContent = message;
+      statusEl.classList.toggle('error', isError);
+    }
+
+    async function updateCode() {
+      const secret = secretInput.value;
+      const seconds = Math.floor(Date.now() / 1000);
+      const remaining = 30 - (seconds % 30);
+      const progress = (remaining / 30) * 100;
+      timerEl.style.width = `${progress}%`;
+      timerEl.style.background = remaining <= 7 ? '#dc2626' : remaining <= 14 ? '#f59e0b' : '#16a34a';
+
+      if (!secret.trim()) {
+        latestCode = '';
+        codeEl.textContent = 'Enter a secret to generate your code';
+        codeEl.classList.add('empty');
+        setMessage('Codes are generated locally. Secrets never leave your browser.');
+        return;
+      }
+
+      try {
+        latestCode = await generateTotp(secret);
+        codeEl.textContent = latestCode;
+        codeEl.classList.remove('empty');
+        setMessage(`New code in ${remaining}s. Click the code to copy.`);
+      } catch (error) {
+        latestCode = '';
+        codeEl.textContent = 'Invalid secret';
+        codeEl.classList.add('empty');
+        setMessage(error.message || 'Use a valid Base32 secret.', true);
+      }
+    }
+
+    async function copyCode() {
+      if (!latestCode) {
+        return;
+      }
+      await navigator.clipboard.writeText(latestCode);
+      setMessage('Code copied.');
+    }
+
+    pasteBtn.addEventListener('click', async () => {
+      try {
+        secretInput.value = cleanSecret(await navigator.clipboard.readText());
+        await updateCode();
+        secretInput.focus();
+      } catch (error) {
+        setMessage('Clipboard permission is needed to paste automatically.', true);
+      }
+    });
+
+    toggleBtn.addEventListener('click', () => {
+      const showing = secretInput.type === 'text';
+      secretInput.type = showing ? 'password' : 'text';
+      toggleBtn.textContent = showing ? 'Show secret' : 'Hide secret';
+    });
+
+    clearBtn.addEventListener('click', () => {
+      secretInput.value = '';
+      replacePathWithCleanSecret('');
+      secretInput.focus();
+      updateCode();
+    });
+
+    secretInput.addEventListener('input', () => {
+      const originalValue = secretInput.value;
+      const selection = secretInput.selectionStart ?? originalValue.length;
+      const nextPosition = cleanSecret(originalValue.slice(0, selection)).length;
+      secretInput.value = cleanSecret(originalValue);
+      secretInput.setSelectionRange(nextPosition, nextPosition);
+      updateCode();
+    });
+    document.querySelector('.code-card').addEventListener('click', copyCode);
+
+    const pathSecret = getSecretFromPath();
+    if (pathSecret) {
+      secretInput.value = cleanSecret(pathSecret);
+      replacePathWithCleanSecret(pathSecret);
+    }
+    updateCode();
+    setInterval(updateCode, 1000);
+  </script>
+</body>
+</html>
