@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#020817">
+  <meta name="theme-color" content="#020713">
   <meta name="referrer" content="no-referrer">
   <title>Elsherif Store - 2FA</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Cpath d='M18 20h28v8H28v5h15v8H28v3h20v8H18z' fill='white'/%3E%3C/svg%3E">
   <style>
     :root {
-      --bg: #020817;
-      --panel: #07111f;
-      --ink: #eaf6ff;
-      --muted: #8fb7d6;
-      --line: rgba(28, 170, 255, 0.32);
-      --primary: #008cff;
-      --primary-dark: #0066ff;
+      --bg: #020713;
+      --panel: #061426;
+      --ink: #e9f9ff;
+      --muted: #8fcfed;
+      --line: rgba(0, 216, 255, 0.34);
+      --primary: #00d8ff;
+      --primary-dark: #008cff;
       --success: #16a34a;
       --danger: #ff3b6b;
-      --shadow: 0 0 34px rgba(0, 140, 255, 0.34);
+      --shadow: 0 0 38px rgba(0, 216, 255, 0.38);
     }
 
     * {
@@ -31,8 +31,8 @@
       font-family: Arial, Helvetica, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 15% 10%, rgba(0, 140, 255, 0.16), transparent 30%),
-        radial-gradient(circle at 85% 90%, rgba(37, 99, 235, 0.13), transparent 34%),
+        radial-gradient(circle at 15% 10%, rgba(0, 216, 255, 0.20), transparent 30%),
+        radial-gradient(circle at 85% 90%, rgba(0, 132, 255, 0.16), transparent 34%),
         var(--bg);
       display: flex;
       align-items: center;
@@ -69,10 +69,10 @@
       width: fit-content;
       margin: 0 auto 14px;
       padding: 7px 11px;
-      border: 1px solid rgba(45, 183, 255, 0.28);
+      border: 1px solid rgba(0, 216, 255, 0.32);
       border-radius: 999px;
-      background: rgba(0, 140, 255, 0.08);
-      color: #9edaff;
+      background: rgba(0, 216, 255, 0.10);
+      color: #9fefff;
       font-size: 12px;
       font-weight: 800;
       letter-spacing: 0.12em;
@@ -84,14 +84,14 @@
       height: 62px;
       margin: 0 auto 16px;
       border-radius: 18px;
-      background: #04152a;
+      background: #031a2f;
       color: white;
       display: grid;
       place-items: center;
       font-size: 25px;
       font-weight: 800;
-      border: 1px solid rgba(45, 183, 255, 0.72);
-      box-shadow: 0 0 22px rgba(0, 140, 255, 0.72), inset 0 0 18px rgba(0, 102, 255, 0.18);
+      border: 1px solid rgba(0, 216, 255, 0.78);
+      box-shadow: 0 0 28px rgba(0, 216, 255, 0.76), inset 0 0 20px rgba(0, 140, 255, 0.22);
       letter-spacing: 0;
     }
 
@@ -100,7 +100,7 @@
       font-size: 34px;
       line-height: 1.15;
       letter-spacing: 0;
-      text-shadow: 0 0 18px rgba(0, 140, 255, 0.62);
+      text-shadow: 0 0 22px rgba(0, 216, 255, 0.70);
     }
 
     .subtitle {
@@ -110,7 +110,7 @@
     }
 
     .panel {
-      background: linear-gradient(145deg, rgba(10, 26, 45, 0.96), rgba(4, 14, 28, 0.98));
+      background: linear-gradient(145deg, rgba(6, 28, 50, 0.96), rgba(2, 11, 24, 0.98));
       border: 1px solid var(--line);
       border-radius: 20px;
       box-shadow: var(--shadow);
@@ -133,20 +133,20 @@
     input {
       width: 100%;
       min-height: 48px;
-      border: 1px solid rgba(45, 183, 255, 0.42);
+      border: 1px solid rgba(0, 216, 255, 0.46);
       border-radius: 12px;
       padding: 0 14px;
       font-size: 16px;
       outline: none;
       color: var(--ink);
-      background: #020b18;
+      background: #020d1d;
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       letter-spacing: 0.02em;
     }
 
     input:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(0, 140, 255, 0.18), 0 0 20px rgba(0, 140, 255, 0.36);
+      box-shadow: 0 0 0 4px rgba(0, 216, 255, 0.18), 0 0 24px rgba(0, 216, 255, 0.42);
     }
 
     button {
@@ -159,26 +159,26 @@
       cursor: pointer;
       background: var(--primary);
       color: white;
-      box-shadow: 0 0 16px rgba(0, 140, 255, 0.50);
+      box-shadow: 0 0 18px rgba(0, 216, 255, 0.58);
       transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
       white-space: nowrap;
     }
 
     button:hover {
       background: var(--primary-dark);
-      box-shadow: 0 0 22px rgba(0, 140, 255, 0.74);
+      box-shadow: 0 0 28px rgba(0, 216, 255, 0.78);
       transform: translateY(-1px);
     }
 
     button.secondary {
-      background: rgba(0, 140, 255, 0.12);
-      color: #bfe7ff;
-      border: 1px solid rgba(45, 183, 255, 0.32);
+      background: rgba(0, 216, 255, 0.12);
+      color: #c8f6ff;
+      border: 1px solid rgba(0, 216, 255, 0.34);
       box-shadow: none;
     }
 
     button.secondary:hover {
-      background: rgba(0, 140, 255, 0.22);
+      background: rgba(0, 216, 255, 0.22);
     }
 
     .actions {
@@ -197,10 +197,10 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      color: #ecfff5;
-      background: #0bbf64;
-      border: 1px solid rgba(83, 255, 169, 0.65);
-      box-shadow: 0 0 18px rgba(11, 191, 100, 0.52);
+      color: #e9fbff;
+      background: #008cff;
+      border: 1px solid rgba(0, 216, 255, 0.72);
+      box-shadow: 0 0 22px rgba(0, 216, 255, 0.54);
       text-decoration: none;
       font-size: 16px;
       font-weight: 800;
@@ -208,8 +208,8 @@
     }
 
     .whatsapp-link:hover {
-      background: #09a957;
-      box-shadow: 0 0 26px rgba(11, 191, 100, 0.72);
+      background: #00b8ff;
+      box-shadow: 0 0 30px rgba(0, 216, 255, 0.76);
       transform: translateY(-1px);
     }
 
@@ -222,17 +222,17 @@
     .code-card {
       margin-top: 24px;
       border: 1px solid var(--line);
-      background: #030d1b;
+      background: #020f22;
       border-radius: 16px;
       padding: 22px;
       text-align: center;
-      box-shadow: inset 0 0 24px rgba(0, 102, 255, 0.14);
+      box-shadow: inset 0 0 28px rgba(0, 216, 255, 0.16);
       cursor: pointer;
       transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
     .code-card:has(.code:not(.empty)):hover {
-      border-color: rgba(45, 183, 255, 0.7);
+      border-color: rgba(0, 216, 255, 0.76);
       transform: translateY(-1px);
     }
 
@@ -247,8 +247,8 @@
       align-items: center;
       justify-content: center;
       overflow-wrap: anywhere;
-      color: #dff5ff;
-      text-shadow: 0 0 18px rgba(0, 140, 255, 0.72);
+      color: #e9fbff;
+      text-shadow: 0 0 24px rgba(0, 216, 255, 0.78);
     }
 
     .empty {
@@ -334,16 +334,16 @@
 
     /* 2026 interface */
     :root {
-      --bg: #07090e;
-      --panel: #10141d;
-      --ink: #f7f8fb;
-      --muted: #8e97a8;
-      --line: rgba(255, 255, 255, 0.09);
-      --primary: #7c5cff;
-      --primary-dark: #6747ee;
-      --success: #38d996;
+      --bg: #020713;
+      --panel: #071426;
+      --ink: #f2fbff;
+      --muted: #8fbfda;
+      --line: rgba(0, 216, 255, 0.18);
+      --primary: #00d8ff;
+      --primary-dark: #008cff;
+      --success: #00d8ff;
       --danger: #ff647c;
-      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.50), 0 0 52px rgba(0, 216, 255, 0.16);
     }
 
     body {
@@ -351,9 +351,9 @@
       padding: 40px 20px;
       font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 50% -10%, rgba(124, 92, 255, 0.22), transparent 38%),
-        radial-gradient(circle at 100% 100%, rgba(31, 191, 145, 0.1), transparent 35%),
-        #07090e;
+        radial-gradient(circle at 50% -10%, rgba(0, 216, 255, 0.24), transparent 38%),
+        radial-gradient(circle at 100% 100%, rgba(0, 140, 255, 0.16), transparent 35%),
+        #020713;
     }
 
     body::before {
@@ -373,10 +373,10 @@
       width: 72px;
       height: 72px;
       margin-bottom: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(0, 216, 255, 0.42);
       border-radius: 22px;
-      background: linear-gradient(145deg, #8d73ff, #5c3de0);
-      box-shadow: 0 18px 45px rgba(103, 71, 238, 0.35), inset 0 1px rgba(255, 255, 255, 0.25);
+      background: linear-gradient(145deg, #00d8ff, #006dff);
+      box-shadow: 0 18px 48px rgba(0, 216, 255, 0.38), inset 0 1px rgba(255, 255, 255, 0.28);
       font-size: 0;
     }
 
@@ -391,10 +391,10 @@
       gap: 8px;
       margin-bottom: 14px;
       padding: 7px 12px;
-      border: 1px solid rgba(124, 92, 255, 0.24);
+      border: 1px solid rgba(0, 216, 255, 0.28);
       border-radius: 999px;
-      background: rgba(124, 92, 255, 0.08);
-      color: #a995ff;
+      background: rgba(0, 216, 255, 0.09);
+      color: #8eefff;
       font-size: 10px;
       letter-spacing: 0.14em;
     }
@@ -404,8 +404,8 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #9c87ff;
-      box-shadow: 0 0 12px rgba(156, 135, 255, 0.9);
+      background: #00d8ff;
+      box-shadow: 0 0 14px rgba(0, 216, 255, 0.95);
     }
 
     h1 {
@@ -415,12 +415,12 @@
     }
 
     h1 span {
-      color: #9c87ff;
+      color: #00d8ff;
     }
 
     .product-name {
       margin: 7px 0 0;
-      color: #d7d9e2;
+      color: #d9f7ff;
       font-size: 15px;
       font-weight: 650;
       letter-spacing: 0.08em;
@@ -439,8 +439,8 @@
       padding: 10px;
       border-color: var(--line);
       border-radius: 30px;
-      background: rgba(15, 19, 28, 0.88);
-      box-shadow: var(--shadow), inset 0 1px rgba(255, 255, 255, 0.05);
+      background: rgba(5, 18, 34, 0.88);
+      box-shadow: var(--shadow), inset 0 1px rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(24px);
     }
 
@@ -458,7 +458,7 @@
 
     .section-head label {
       margin: 0;
-      color: #e9ebf1;
+      color: #e9fbff;
       font-size: 14px;
     }
 
@@ -466,7 +466,7 @@
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      color: #7be0b7;
+      color: #8eefff;
       font-size: 12px;
       font-weight: 700;
     }
@@ -476,8 +476,8 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: #38d996;
-      box-shadow: 0 0 12px #38d996;
+      background: #00d8ff;
+      box-shadow: 0 0 14px #00d8ff;
     }
 
     .field-row {
@@ -486,13 +486,13 @@
       padding: 6px;
       border: 1px solid var(--line);
       border-radius: 16px;
-      background: #090c12;
+      background: #020d1d;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .field-row:focus-within {
-      border-color: rgba(124, 92, 255, 0.72);
-      box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.1);
+      border-color: rgba(0, 216, 255, 0.72);
+      box-shadow: 0 0 0 4px rgba(0, 216, 255, 0.12), 0 0 24px rgba(0, 216, 255, 0.18);
     }
 
     input {
@@ -512,13 +512,13 @@
     button {
       min-height: 46px;
       border-radius: 11px;
-      background: linear-gradient(135deg, #876aff, #6747ee);
-      box-shadow: 0 8px 24px rgba(103, 71, 238, 0.25);
+      background: linear-gradient(135deg, #00d8ff, #0078ff);
+      box-shadow: 0 8px 26px rgba(0, 216, 255, 0.28);
     }
 
     button:hover {
-      background: linear-gradient(135deg, #947aff, #7353f2);
-      box-shadow: 0 10px 28px rgba(103, 71, 238, 0.35);
+      background: linear-gradient(135deg, #5eeeff, #009cff);
+      box-shadow: 0 10px 32px rgba(0, 216, 255, 0.42);
     }
 
     .actions {
@@ -531,7 +531,7 @@
       padding: 0 11px;
       border: 0;
       background: transparent;
-      color: #929bad;
+      color: #8fbfda;
       font-size: 12px;
     }
 
@@ -548,8 +548,8 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 22px;
       background:
-        radial-gradient(circle at 50% 0%, rgba(124, 92, 255, 0.16), transparent 55%),
-        #0b0e15;
+        radial-gradient(circle at 50% 0%, rgba(0, 216, 255, 0.18), transparent 55%),
+        #03101f;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0.04);
     }
 
@@ -557,14 +557,14 @@
       content: 'CURRENT CODE';
       display: block;
       margin-bottom: 18px;
-      color: #747d8e;
+      color: #79b8d6;
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 0.2em;
     }
 
     .code-card:has(.code:not(.empty)):hover {
-      border-color: rgba(124, 92, 255, 0.48);
+      border-color: rgba(0, 216, 255, 0.55);
       transform: translateY(-2px);
     }
 
@@ -574,12 +574,12 @@
       font-family: "SFMono-Regular", Consolas, monospace;
       font-size: clamp(38px, 10vw, 58px);
       letter-spacing: 0.16em;
-      text-shadow: 0 0 32px rgba(124, 92, 255, 0.42);
+      text-shadow: 0 0 34px rgba(0, 216, 255, 0.52);
     }
 
     .code.empty {
       padding: 0 20px;
-      color: #778093;
+      color: #7faec8;
       font-family: inherit;
       font-size: 15px;
       letter-spacing: 0;
@@ -590,7 +590,7 @@
       height: 5px;
       max-width: 390px;
       margin-top: 24px;
-      background: rgba(255, 255, 255, 0.07);
+      background: rgba(0, 216, 255, 0.09);
     }
 
     .timer {
@@ -600,7 +600,7 @@
 
     .status {
       margin-top: 14px;
-      color: #7f8899;
+      color: #80b6d1;
       font-size: 12px;
     }
 
@@ -610,26 +610,26 @@
       margin: 10px 12px 12px;
       border: 0;
       border-radius: 15px;
-      background: rgba(56, 217, 150, 0.09);
-      color: #68e0ad;
+      background: rgba(0, 216, 255, 0.10);
+      color: #8eefff;
       box-shadow: none;
       font-size: 14px;
     }
 
     .whatsapp-link:hover {
-      background: rgba(56, 217, 150, 0.15);
+      background: rgba(0, 216, 255, 0.18);
       box-shadow: none;
     }
 
     .footnote {
       margin-top: 22px;
-      color: #5f6775;
+      color: #638ba3;
       font-size: 12px;
     }
 
     .compat {
       margin-top: 7px;
-      color: #454c58;
+      color: #486a7f;
       font-size: 11px;
     }
 
@@ -820,7 +820,7 @@
       const remaining = 30 - (seconds % 30);
       const progress = (remaining / 30) * 100;
       timerEl.style.width = `${progress}%`;
-      timerEl.style.background = remaining <= 7 ? '#dc2626' : remaining <= 14 ? '#f59e0b' : '#16a34a';
+      timerEl.style.background = remaining <= 7 ? '#dc2626' : remaining <= 14 ? '#f59e0b' : '#00d8ff';
 
       if (!secret.trim()) {
         latestCode = '';
