@@ -654,6 +654,29 @@
       text-shadow: none;
     }
 
+    .copy-code-button {
+      min-height: 40px;
+      margin-top: 18px;
+      padding: 0 16px;
+      border: 1px solid rgba(0, 216, 255, 0.22);
+      border-radius: 13px;
+      background: rgba(0, 216, 255, 0.11);
+      color: #8eefff;
+      box-shadow: 0 0 20px rgba(0, 216, 255, 0.14);
+      font-size: 13px;
+    }
+
+    .copy-code-button:hover:not(:disabled) {
+      background: rgba(0, 216, 255, 0.18);
+      box-shadow: 0 0 24px rgba(0, 216, 255, 0.22);
+    }
+
+    .copy-code-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.46;
+      transform: none;
+    }
+
     .timer-wrap {
       height: 5px;
       max-width: 390px;
@@ -864,6 +887,7 @@
 
       <div class="code-card" aria-live="polite">
         <div id="code" class="code empty">Enter a secret to generate your code</div>
+        <button id="copy-code" class="copy-code-button" type="button" disabled>Copy code</button>
         <div class="timer-wrap" aria-hidden="true">
           <div id="timer" class="timer"></div>
         </div>
@@ -920,6 +944,7 @@
     const pasteBtn = document.getElementById('paste');
     const toggleBtn = document.getElementById('toggle');
     const clearBtn = document.getElementById('clear');
+    const copyCodeBtn = document.getElementById('copy-code');
 
     let latestCode = '';
 
@@ -1019,6 +1044,7 @@
         latestCode = '';
         codeEl.textContent = 'Enter a secret to generate your code';
         codeEl.classList.add('empty');
+        copyCodeBtn.disabled = true;
         setMessage('Codes are generated locally. Secrets never leave your browser.');
         return;
       }
@@ -1027,11 +1053,13 @@
         latestCode = await generateTotp(secret);
         codeEl.textContent = latestCode;
         codeEl.classList.remove('empty');
-        setMessage(`New code in ${remaining}s. Click the code to copy.`);
+        copyCodeBtn.disabled = false;
+        setMessage(`New code in ${remaining}s. Use Copy code to copy it.`);
       } catch (error) {
         latestCode = '';
         codeEl.textContent = 'Invalid secret';
         codeEl.classList.add('empty');
+        copyCodeBtn.disabled = true;
         setMessage(error.message || 'Use a valid Base32 secret.', true);
       }
     }
@@ -1074,6 +1102,10 @@
       secretInput.value = cleanSecret(originalValue);
       secretInput.setSelectionRange(nextPosition, nextPosition);
       updateCode();
+    });
+    copyCodeBtn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      copyCode();
     });
     document.querySelector('.code-card').addEventListener('click', copyCode);
 
