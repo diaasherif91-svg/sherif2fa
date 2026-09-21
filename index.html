@@ -9,7 +9,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Cpath d='M18 20h28v8H28v5h15v8H28v3h20v8H18z' fill='white'/%3E%3C/svg%3E">
   <style>
     :root {
-      --bg: #020713;
+      --bg: #00040d;
       --panel: #061426;
       --ink: #e9f9ff;
       --muted: #8fcfed;
@@ -31,9 +31,9 @@
       font-family: Arial, Helvetica, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 14% 8%, rgba(0, 238, 255, 0.24), transparent 30%),
-        radial-gradient(circle at 82% 84%, rgba(0, 92, 255, 0.22), transparent 36%),
-        linear-gradient(135deg, #010714 0%, #031432 48%, #001a3f 100%),
+        radial-gradient(circle at 14% 8%, rgba(0, 168, 255, 0.16), transparent 30%),
+        radial-gradient(circle at 82% 84%, rgba(0, 64, 180, 0.18), transparent 36%),
+        linear-gradient(135deg, #00040d 0%, #020b22 50%, #00112d 100%),
         var(--bg);
       display: flex;
       align-items: center;
@@ -47,10 +47,10 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.22;
+      opacity: 0.20;
       background-image:
-        linear-gradient(rgba(0, 216, 255, 0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 216, 255, 0.055) 1px, transparent 1px);
+        linear-gradient(rgba(0, 172, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 172, 255, 0.045) 1px, transparent 1px);
       background-size: 36px 36px;
       mask-image: linear-gradient(to bottom, black, transparent 85%);
     }
@@ -58,34 +58,34 @@
     body::after {
       content: '';
       position: fixed;
-      left: 50%;
-      bottom: -12vh;
-      width: min(34vw, 230px);
-      height: 72vh;
+      inset: 0 0 auto;
+      height: 38vh;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.44;
-      background: linear-gradient(to top, rgba(0, 216, 255, 0), rgba(0, 216, 255, 0.95), rgba(122, 245, 255, 0));
-      clip-path: polygon(48% 100%, 58% 69%, 49% 69%, 65% 34%, 55% 35%, 72% 0, 38% 42%, 49% 41%, 33% 74%, 43% 73%);
-      filter: drop-shadow(0 0 18px rgba(0, 216, 255, 0.95)) drop-shadow(0 0 42px rgba(0, 102, 255, 0.62));
-      transform: translateX(-50%);
-      animation: lightning-rise 4.8s ease-in-out infinite;
+      opacity: 0.42;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 360'%3E%3Cg fill='none' stroke='%237af5ff' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='72 34 130 78 103 91 188 150 149 160 232 232' stroke-width='4' opacity='.72'/%3E%3Cpolyline points='130 78 174 82 151 112' stroke-width='2.5' opacity='.48'/%3E%3Cpolyline points='788 0 737 62 766 70 698 132 735 140 648 214' stroke-width='4' opacity='.62'/%3E%3Cpolyline points='737 62 690 66 714 97' stroke-width='2.5' opacity='.42'/%3E%3Cpolyline points='1088 48 1028 100 1058 112 982 172 1016 184 932 252' stroke-width='3.5' opacity='.52'/%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: cover;
+      filter: drop-shadow(0 0 12px rgba(0, 216, 255, 0.86)) drop-shadow(0 0 34px rgba(0, 92, 255, 0.46));
+      animation: sky-lightning 5.6s ease-in-out infinite;
     }
 
-    @keyframes lightning-rise {
+    @keyframes sky-lightning {
       0%, 100% {
-        opacity: 0.22;
-        transform: translateX(-50%) translateY(16px) scaleY(0.94);
+        opacity: 0.20;
       }
-      42% {
-        opacity: 0.70;
-        transform: translateX(-50%) translateY(-20px) scaleY(1.04);
+      44% {
+        opacity: 0.42;
       }
       48% {
-        opacity: 0.98;
+        opacity: 0.86;
       }
-      54% {
-        opacity: 0.36;
+      51% {
+        opacity: 0.30;
+      }
+      56% {
+        opacity: 0.58;
       }
     }
 
@@ -429,7 +429,7 @@
 
     /* 2026 interface */
     :root {
-      --bg: #020713;
+      --bg: #00040d;
       --panel: #071426;
       --ink: #f2fbff;
       --muted: #8fbfda;
@@ -446,10 +446,10 @@
       padding: 40px 20px;
       font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 50% -10%, rgba(0, 238, 255, 0.28), transparent 38%),
-        radial-gradient(circle at 100% 100%, rgba(0, 102, 255, 0.22), transparent 36%),
-        radial-gradient(circle at 8% 74%, rgba(0, 216, 255, 0.12), transparent 28%),
-        linear-gradient(145deg, #010714 0%, #031432 48%, #001a3f 100%);
+        radial-gradient(circle at 50% -10%, rgba(0, 172, 255, 0.20), transparent 38%),
+        radial-gradient(circle at 100% 100%, rgba(0, 68, 190, 0.20), transparent 36%),
+        radial-gradient(circle at 8% 74%, rgba(0, 136, 255, 0.09), transparent 28%),
+        linear-gradient(145deg, #00040d 0%, #020b22 50%, #00112d 100%);
     }
 
     body::before {
