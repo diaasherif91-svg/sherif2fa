@@ -950,11 +950,17 @@
       box-shadow: 0 0 24px rgba(56, 189, 248, 0.22);
     }
 
-    .floating-whatsapp {
+    .floating-contact {
       position: fixed;
       right: 18px;
       bottom: 18px;
       z-index: 5;
+      display: grid;
+      gap: 10px;
+      justify-items: end;
+    }
+
+    .floating-contact a {
       min-height: 50px;
       padding: 0 16px;
       border-radius: 999px;
@@ -962,20 +968,37 @@
       align-items: center;
       justify-content: center;
       gap: 9px;
-      color: #edfff7;
-      background: #00c46f;
-      border: 1px solid rgba(31, 255, 154, 0.72);
-      box-shadow: 0 0 24px rgba(31, 255, 154, 0.42);
       text-decoration: none;
       font-size: 14px;
       font-weight: 900;
       transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
 
+    .floating-whatsapp {
+      color: #edfff7;
+      background: #00c46f;
+      border: 1px solid rgba(31, 255, 154, 0.72);
+      box-shadow: 0 0 24px rgba(31, 255, 154, 0.42);
+    }
+
     .floating-whatsapp:hover,
     .floating-whatsapp:focus-visible {
       background: #00e682;
       box-shadow: 0 0 34px rgba(31, 255, 154, 0.60);
+      transform: translateY(-2px);
+    }
+
+    .floating-facebook {
+      color: #eaf8ff;
+      background: rgba(0, 136, 255, 0.90);
+      border: 1px solid rgba(0, 216, 255, 0.60);
+      box-shadow: 0 0 24px rgba(0, 136, 255, 0.42);
+    }
+
+    .floating-facebook:hover,
+    .floating-facebook:focus-visible {
+      background: rgba(0, 166, 255, 0.96);
+      box-shadow: 0 0 34px rgba(0, 216, 255, 0.56);
       transform: translateY(-2px);
     }
 
@@ -1034,9 +1057,13 @@
         min-height: 52px;
       }
 
-      .floating-whatsapp {
+      .floating-contact {
         right: 14px;
         bottom: 14px;
+        gap: 8px;
+      }
+
+      .floating-contact a {
         min-height: 46px;
         padding: 0 13px;
         font-size: 13px;
@@ -1148,7 +1175,10 @@
     <p class="footnote">Elsherif Store - 2FA</p>
     <p class="compat">Compatible with Google Authenticator, Microsoft Authenticator, Authy, GitHub, Discord and all TOTP services</p>
   </main>
-  <a class="floating-whatsapp" href="https://wa.me/201131437252" target="_blank" rel="noopener noreferrer" aria-label="Contact Elsherif Store on WhatsApp">WhatsApp</a>
+  <div class="floating-contact" aria-label="Quick contact links">
+    <a class="floating-whatsapp" href="https://wa.me/201131437252" target="_blank" rel="noopener noreferrer" aria-label="Contact Elsherif Store on WhatsApp">WhatsApp</a>
+    <a class="floating-facebook" href="https://www.facebook.com/share/19jTVmtaGX/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Open Elsherif Store on Facebook">Facebook</a>
+  </div>
 
   <script>
     const secretInput = document.getElementById('secret');
