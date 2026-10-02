@@ -670,7 +670,7 @@
     }
 
     .code-card::before {
-      content: 'CURRENT CODE';
+      content: 'كود التحقق';
       display: block;
       margin-bottom: 18px;
       color: #79b8d6;
@@ -872,7 +872,7 @@
     }
 
     .subscription-card::after {
-      content: 'Order';
+      content: 'اطلب';
       margin-left: auto;
       padding: 4px 7px;
       border-radius: 999px;
@@ -1116,47 +1116,47 @@
       <div class="logo" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 5 6v5c0 4.6 2.9 8.5 7 10 4.1-1.5 7-5.4 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.8"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <div class="eyebrow">PRIVATE / LOCAL / SECURE</div>
+      <div class="eyebrow">آمن / سريع / خاص</div>
       <h1>Elsherif Store <span>2FA</span></h1>
-      <p class="product-name">Secure Authenticator</p>
+      <p class="product-name">مولّد أكواد آمن</p>
       <p class="tagline" lang="ar" dir="rtl">خليك مطمّن مع Elsherif Store</p>
-      <p class="subtitle">Instant verification codes, generated privately on your device. Nothing leaves your browser.</p>
+      <p class="subtitle" lang="ar" dir="rtl">اكتب المفتاح وخد كود التحقق فورًا</p>
     </section>
 
     <section class="panel">
       <div class="input-section">
         <div class="section-head">
-          <label for="secret">Authenticator secret</label>
-          <span class="local-pill">On-device</span>
+          <label for="secret">المفتاح السري</label>
+          <span class="local-pill">على جهازك فقط</span>
         </div>
         <div class="field-row">
-          <input id="secret" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your Base32 key">
-          <button id="paste" type="button">Paste key</button>
+          <input id="secret" type="password" autocomplete="off" spellcheck="false" placeholder="الصق مفتاح Base32 هنا">
+          <button id="paste" type="button">لصق</button>
         </div>
 
         <div class="actions">
-          <button id="toggle" class="secondary" type="button">Show secret</button>
-          <button id="clear" class="secondary" type="button">Clear</button>
+          <button id="toggle" class="secondary" type="button">إظهار</button>
+          <button id="clear" class="secondary" type="button">مسح</button>
         </div>
       </div>
 
       <div class="code-card" aria-live="polite">
         <div id="timer-display" class="code-display">
           <div class="code-row">
-            <div id="code" class="code empty">Enter a secret to generate your code</div>
+            <div id="code" class="code empty">اكتب المفتاح لعرض الكود</div>
             <span id="timer-label" class="timer-label">30s</span>
           </div>
           <div class="timer-track" aria-hidden="true">
             <div id="timer" class="timer-bar"></div>
           </div>
         </div>
-        <button id="copy-code" class="copy-code-button" type="button" disabled>Copy code</button>
-        <div id="status" class="status">Codes are generated locally. Secrets never leave your browser.</div>
+        <button id="copy-code" class="copy-code-button" type="button" disabled>نسخ الكود</button>
+        <div id="status" class="status">الكود بيتولد على جهازك فقط. المفتاح لا يتم إرساله لأي سيرفر.</div>
       </div>
 
       <section class="subscriptions" aria-labelledby="subscriptions-title">
-        <h2 id="subscriptions-title">Available subscriptions</h2>
-        <p>Premium digital plans from Elsherif Store.</p>
+        <h2 id="subscriptions-title">الاشتراكات المتاحة</h2>
+        <p lang="ar" dir="rtl">اختار الخدمة واطلبها مباشرة من واتساب</p>
         <div class="subscription-grid">
           <a class="subscription-card" data-short="GPT+" href="https://wa.me/201131437252?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D9%83%20%D9%81%D9%8A%20ChatGPT%20Plus%20%D9%85%D9%86%20Elsherif%20Store" target="_blank" rel="noopener noreferrer">ChatGPT Plus</a>
           <a class="subscription-card" data-short="PRO" href="https://wa.me/201131437252?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D9%83%20%D9%81%D9%8A%20ChatGPT%20Pro%20%D9%85%D9%86%20Elsherif%20Store" target="_blank" rel="noopener noreferrer">ChatGPT Pro</a>
@@ -1193,7 +1193,7 @@
     </section>
 
     <p class="footnote">Elsherif Store - 2FA</p>
-    <p class="compat">Compatible with Google Authenticator, Microsoft Authenticator, Authy, GitHub, Discord and all TOTP services</p>
+    <p class="compat" lang="ar" dir="rtl">متوافق مع Google Authenticator و Microsoft Authenticator و Authy ومعظم خدمات TOTP</p>
   </main>
   <div class="floating-contact" aria-label="Quick contact links">
     <a class="floating-whatsapp" href="https://wa.me/201131437252" target="_blank" rel="noopener noreferrer" aria-label="Contact Elsherif Store on WhatsApp">WhatsApp</a>
@@ -1246,7 +1246,7 @@
       for (const char of cleaned) {
         const value = alphabet.indexOf(char);
         if (value === -1) {
-          throw new Error('Use a valid Base32 secret.');
+          throw new Error('استخدم مفتاح Base32 صحيح.');
         }
         bits += value.toString(2).padStart(5, '0');
       }
@@ -1256,7 +1256,7 @@
       }
 
       if (!bytes.length) {
-        throw new Error('Enter a secret to generate your code.');
+        throw new Error('اكتب المفتاح لعرض الكود.');
       }
 
       return new Uint8Array(bytes);
@@ -1311,10 +1311,10 @@
 
       if (!secret.trim()) {
         latestCode = '';
-        codeEl.textContent = 'Enter a secret to generate your code';
+        codeEl.textContent = 'اكتب المفتاح لعرض الكود';
         codeEl.classList.add('empty');
         copyCodeBtn.disabled = true;
-        setMessage('Codes are generated locally. Secrets never leave your browser.');
+        setMessage('الكود بيتولد على جهازك فقط. المفتاح لا يتم إرساله لأي سيرفر.');
         return;
       }
 
@@ -1323,13 +1323,13 @@
         codeEl.textContent = latestCode;
         codeEl.classList.remove('empty');
         copyCodeBtn.disabled = false;
-        setMessage(`New code in ${remaining}s. Use Copy code to copy it.`);
+        setMessage(`الكود الجديد خلال ${remaining} ثانية. استخدم زر نسخ الكود.`);
       } catch (error) {
         latestCode = '';
-        codeEl.textContent = 'Invalid secret';
+        codeEl.textContent = 'المفتاح غير صحيح';
         codeEl.classList.add('empty');
         copyCodeBtn.disabled = true;
-        setMessage(error.message || 'Use a valid Base32 secret.', true);
+        setMessage(error.message || 'استخدم مفتاح Base32 صحيح.', true);
       }
     }
 
@@ -1338,7 +1338,7 @@
         return;
       }
       await navigator.clipboard.writeText(latestCode);
-      setMessage('Code copied.');
+      setMessage('تم نسخ الكود.');
     }
 
     pasteBtn.addEventListener('click', async () => {
@@ -1347,14 +1347,14 @@
         await updateCode();
         secretInput.focus();
       } catch (error) {
-        setMessage('Clipboard permission is needed to paste automatically.', true);
+        setMessage('يجب السماح بالوصول للحافظة لاستخدام اللصق التلقائي.', true);
       }
     });
 
     toggleBtn.addEventListener('click', () => {
       const showing = secretInput.type === 'text';
       secretInput.type = showing ? 'password' : 'text';
-      toggleBtn.textContent = showing ? 'Show secret' : 'Hide secret';
+      toggleBtn.textContent = showing ? 'إظهار' : 'إخفاء';
     });
 
     clearBtn.addEventListener('click', () => {
